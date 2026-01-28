@@ -1,0 +1,20 @@
+name: Containerized Python Workflow
+ 
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+ 
+jobs:
+  run-container:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      - name: Build Docker image
+        run: docker build -t python-container-app .
+ 
+      - name: Run Docker container
+        run: docker run python-container-app
