@@ -22,7 +22,7 @@ jobs:
       # Step 2: Build Docker image
       - name: Build Docker Image
         run: |
-          docker build -t nithish005/python-app:1.0 .
+          docker build -t nithish005/python-flask-app .
  
       # Step 3: Docker Hub Login
       - name: Docker Login
@@ -50,5 +50,5 @@ jobs:
       # Step 4: Push image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push nithish005/python-app:1.0
+          docker push nithish005/python-flask-app
           
