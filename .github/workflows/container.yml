@@ -18,6 +18,15 @@ jobs:
       # Step 1: Checkout source code
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required for SonarQube analysis
+ 
+      # Step 1.5: SonarQube Scan
+      - name: SonarQube Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
  
       # Step 2: Build Docker image
       - name: Build Docker Image
