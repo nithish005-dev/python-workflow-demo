@@ -1,9 +1,9 @@
 # Build stage - Install dependencies and run SonarQube analysis
-FROM python:3.10-slim as builder
+FROM python:3.10-slim AS builder
 
 # Install Java and other dependencies needed for SonarQube Scanner
 RUN apt-get update && apt-get install -y \
-    openjdk-17-jre-headless \
+    openjdk-21-jre-headless \
     curl \
     unzip \
     && rm -rf /var/lib/apt/lists/*
