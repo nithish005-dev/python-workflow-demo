@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Health check endpoint
 @app.route('/health', methods=['GET'])
 def health():
-    """Health check endpoint that returns the status of the application."""
+    """This Health check endpoint that returns the status of the application."""
     return jsonify({
         'status': 'healthy',
         'timestamp': datetime.utcnow().isoformat(),
