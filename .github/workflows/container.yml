@@ -47,6 +47,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+            #-------------------ACR LOGIN ---------------------#   
+
+      - name: Azure ACR Login
+        uses: azure/docker-login@v1
+        with:
+           login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+           username: ${{ secrets.ACR_USERNAME }}
+           password: ${{ secrets.ACR_TOKEN }}
+
       -  name: Build and push Docker image
          uses: docker/build-push-action@v6
          with:
@@ -54,10 +63,22 @@ jobs:
           push: true
           file: ./Dockerfile
           tags: |
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:$ {{GITHUB_SHA}} 
+          
  
       # Step 4: Push image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push nithish005/python-flask-app
+          docker push nithish005/python-flask-app:$ {{GITHUB_SHA}}
+
+      #step 5: Push image to ACR
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |          
+            ${{ secrets.ACR_LOGIN_SERVER }}/python-webapp:$ {{GITHUB_SHA}}
           
