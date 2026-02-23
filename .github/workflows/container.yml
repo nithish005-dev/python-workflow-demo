@@ -63,13 +63,13 @@ jobs:
           push: true
           file: ./Dockerfile
           tags: |
-            ghcr.io/${{ github.repository }}:$ {{GITHUB_SHA}} 
+            ghcr.io/${{ github.repository }}:$ {{github_sha}} 
           
  
       # Step 4: Push image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push nithish005/python-flask-app:$ {{GITHUB_SHA}}
+          docker push nithish005/python-flask-app:$ {{github_sha}}
 
       #step 5: Push image to ACR
       
@@ -80,5 +80,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |          
-            ${{ secrets.ACR_LOGIN_SERVER }}/python-webapp:$ {{GITHUB_SHA}}
+            ${{ secrets.ACR_LOGIN_SERVER }}/python-webapp:$ {{github_sha}}
           
