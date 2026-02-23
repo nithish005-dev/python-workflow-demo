@@ -48,5 +48,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |          
-            ${{ secrets.ACR_LOGIN_SERVER }}/python-webapp:$ {{github.sha}}
+            ${{ secrets.ACR_LOGIN_SERVER }}/python-webapp:${{github.sha}}
           
